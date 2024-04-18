@@ -103,3 +103,132 @@ function task4() {
     trapez2.zmienNazwe("Nowy Trapez B");
     console.log(`Nowa nazwa Trapezu B: ${trapez2.nazwa}`);
 }
+function task5(){
+    class Triangle {
+        constructor(base, height) {
+            this.base = base;
+            this.height = height;
+        }
+        calculateArea() {
+            return (this.base * this.height) / 2;
+        }
+    }
+    class Trapezoid {
+        constructor(base1, base2, height) {
+            this.base1 = base1;
+            this.base2 = base2;
+            this.height = height;
+        }
+        calculateArea() {
+            return ((this.base1 + this.base2) * this.height) / 2;
+        }
+    }
+    const triangle = new Triangle(4, 6);
+    const trapezoid = new Trapezoid(3, 4, 5);
+    const triangleArea = triangle.calculateArea();
+    const trapezoidArea = trapezoid.calculateArea();
+    if (triangleArea > trapezoidArea) {
+        console.log(`The triangle has a larger area: ${triangleArea}`);
+    } else if (trapezoidArea > triangleArea) {
+        console.log(`The trapezoid has a larger area: ${trapezoidArea}`);
+    } else {
+        console.log("Both figures have the same area.");
+    }
+
+}
+function task6(){
+    class Rectangle {
+        constructor(width, height) {
+            this.width = width;
+            this.height = height;
+        }
+        calculateArea() {
+            return this.width * this.height;
+        }
+        calculatePerimeter() {
+            return 2 * (this.width + this.height);
+        }
+        // Check if the rectangle is a square
+        isSquare() {
+            return this.width === this.height;
+        }
+    }
+    const widthInput = parseFloat(document.getElementById('widthInput').value);
+    const heightInput = parseFloat(document.getElementById('heightInput').value);
+    const rectangle = new Rectangle(widthInput, heightInput);
+    const infoDiv = document.getElementById('rectangleInfo');
+    infoDiv.innerHTML = `
+                <p><strong>Rectangle Area:</strong> ${rectangle.calculateArea()}</p>
+                <p><strong>Rectangle Perimeter:</strong> ${rectangle.calculatePerimeter()}</p>
+                <p><strong>Is the rectangle a square?</strong> ${rectangle.isSquare() ? 'Yes' : 'No'}`
+}
+function task7(){
+    class Car {
+        constructor(make, model, year, color, maxSpeed) {
+            this.make = make;
+            this.model = model;
+            this.year = year;
+            this.color = color;
+            this.maxSpeed = maxSpeed;
+            this.currentSpeed = 0;
+        }
+
+        accelerate(speedIncrement) {
+            this.currentSpeed += speedIncrement;
+            if (this.currentSpeed > this.maxSpeed) {
+                this.currentSpeed = this.maxSpeed;
+            }
+        }
+        decelerate(speedDecrement) {
+            this.currentSpeed -= speedDecrement;
+            if (this.currentSpeed < 0) {
+                this.currentSpeed = 0;
+            }
+        }
+        getInfo() {
+            return `${this.make} ${this.model} (${this.year}), Kolor: ${this.color}, Prędkość: ${this.currentSpeed} km/h`;
+        }
+        getAge() {
+            const currentYear = new Date().getFullYear();
+            return currentYear - this.year;
+        }
+    }
+    
+    // Przykład użycia:
+    const myCar = new Car('Toyota', 'Camry', 2022, 'Niebieski', 200);
+    myCar.accelerate(50);
+    console.log(myCar.getInfo());
+    console.log(`Wiek samochodu: ${myCar.getAge()} lat`);
+    
+}
+function task8(){
+    class BankAccount {
+        constructor(accountNumber, balance) {
+            this.accountNumber = accountNumber;
+            this.balance = balance;
+        }
+    
+        deposit(amount) {
+            this.balance += amount;
+        }
+    
+        withdraw(amount) {
+            if (this.balance >= amount) {
+                this.balance -= amount;
+            } else {
+                console.log("Insufficient balance");
+            }
+        }
+    
+        getBalance() {
+            return this.balance;
+        }
+    }
+    // Example usage:
+    const myAccount = new BankAccount("BA1234", 500);
+    console.log(`Initial balance: $${myAccount.getBalance()}`);
+    myAccount.deposit(1000);
+    console.log(`Balance after depositing $1000: $${myAccount.getBalance()}`);
+    myAccount.withdraw(600);
+    console.log(`Balance after withdrawing $600: $${myAccount.getBalance()}`);
+}
